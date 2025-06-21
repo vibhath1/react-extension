@@ -1,0 +1,151 @@
+/* Tooltip styling for mic button */
+.mic-btn span[style*="Press and hold to speak"] {
+  animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+/* Voice recording dot */
+.voice-dot {
+  width: 10px;
+  height: 10px;
+  background: #e53935;
+  border-radius: 50%;
+  margin-right: 6px;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(229,57,53, 0.7);}
+  70% { box-shadow: 0 0 0 8px rgba(229,57,53, 0);}
+  100% { box-shadow: 0 0 0 0 rgba(229,57,53, 0);}
+}
+
+/* Voice wave animation */
+.voice-wave {
+  width: 18px;
+  height: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.voice-wave::before, .voice-wave::after {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 100%;
+  background: #1976d2;
+  border-radius: 2px;
+  animation: wave 1s infinite alternate;
+}
+
+.voice-wave::after {
+  animation-delay: 0.5s;
+}
+
+@keyframes wave {
+  0% { height: 10px;}
+  50% { height: 18px;}
+  100% { height: 10px;}
+}
+
+.mic-btn {
+  position: relative;
+  overflow: visible;
+}
+
+.mic-ripple {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.ripple {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(25, 118, 210, 0.18);
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0.7;
+  animation: ripplePulse 1.5s infinite;
+}
+
+.ripple2 {
+  animation-delay: 0.5s;
+}
+.ripple3 {
+  animation-delay: 1s;
+}
+
+@keyframes ripplePulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.7;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.7);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+.response-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-left: 24px;
+}
+
+.resp-btn {
+  background: #f5f7fa;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background 0.15s, border 0.15s, box-shadow 0.15s;
+  color: #222;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.resp-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.resp-btn:hover:not(:disabled) {
+  background: #e3eaf7;
+  border-color: #1976d2;
+  color: #1976d2;
+  box-shadow: 0 2px 8px 0 rgba(25, 118, 210, 0.08);
+}
+
+.regen-btn svg {
+  vertical-align: middle;
+}
+
+.feedback-msg {
+  margin-left: 28px;
+  margin-top: 2px;
+  font-size: 0.93em;
+  color: #1976d2;
+  font-style: italic;
+  opacity: 0.85;
+}

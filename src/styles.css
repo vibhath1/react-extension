@@ -120,3 +120,33 @@ button:hover {
   50% { transform: translateY(-6px); }
   100% { transform: translateY(0px); }
 }
+
+.voice-dot {
+  width: 8px;
+  height: 8px;
+  background: #1976d2;
+  border-radius: 50%;
+  margin-right: 4px;
+  animation: pulse-dot 1s infinite;
+}
+
+.voice-wave {
+  width: 18px;
+  height: 8px;
+  background: linear-gradient(90deg, #1976d2 40%, transparent 100%);
+  border-radius: 4px;
+  animation: wave-move 1s infinite linear;
+  opacity: 0.7;
+}
+
+@keyframes pulse-dot {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes wave-move {
+  0% { transform: scaleY(1); }
+  50% { transform: scaleY(1.7); }
+  100% { transform: scaleY(1); }
+}

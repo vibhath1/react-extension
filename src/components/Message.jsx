@@ -1,10 +1,11 @@
 import React from "react";
+import "./Message.css"; // Import the CSS file
 
 const Message = ({ msg }) => {
   return (
     <div className={`msg ${msg.role}`}>
       <div className="bubble">
-        <p>{msg.text}</p>
+        <p className="bubble-text">{msg.text}</p>
         {msg.sources && msg.sources.length > 0 && (
           <ul className="sources">
             {msg.sources.map((src, i) => (
