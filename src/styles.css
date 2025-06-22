@@ -3,10 +3,38 @@ body {
   font-family: "Segoe UI", sans-serif;
 }
 
+html, body {
+  width: 360px;
+  height: 600px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+
+.extension-root {
+  width: 100vw;
+  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
 .extension-container {
-  width: 350px;
-  padding: 12px;
-  background: #f0f2f5;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 h2 {
@@ -14,139 +42,172 @@ h2 {
   color: #333;
 }
 
-.chat-container {
+.chatbox-glass {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  border-radius: 0;
+  background: rgba(255,255,255,0.22);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border: 1.5px solid rgba(255,255,255,0.22);
   display: flex;
   flex-direction: column;
-  height: 420px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: 2;
+  transition: box-shadow 0.2s;
+}
+
+/* Colorful gradient background */
+.background-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+  background-size: 200% 200%;
+  animation: gradientMove 8s ease-in-out infinite;
+  filter: blur(0px);
+}
+
+@keyframes gradientMove {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+/* Splash screen styles */
+.splash-screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(247,250,253,0.95);
+  transition: opacity 0.8s;
+  opacity: 1;
   overflow: hidden;
 }
 
-.chat-box {
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-  background: #fefefe;
+.splash-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
 }
 
-.msg {
+.splash-robot-full {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: blur(0.5px) brightness(0.93) saturate(1.1);
+  z-index: 1;
+  top: 0;
+  left: 0;
+}
+
+.splash-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 2;
   display: flex;
-  margin-bottom: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 }
 
-.msg.user {
-  justify-content: flex-end;
+.splash-title {
+  font-family: 'Segoe UI', 'Montserrat', 'Poppins', sans-serif;
+  font-size: 2.1em;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 4px 24px #a18cd1, 0 1px 2px #2228;
+  margin-bottom: 0.5em;
+  letter-spacing: 1px;
+  text-align: center;
 }
 
-.msg.ai {
-  justify-content: flex-start;
+.splash-motto {
+  font-family: 'Montserrat', 'Segoe UI', sans-serif;
+  font-size: 1.15em;
+  color: #fbc2eb;
+  text-shadow: 0 2px 12px #a18cd1, 0 1px 2px #2228;
+  margin-top: 0;
+  text-align: center;
+  font-style: italic;
+  font-weight: 500;
 }
 
-.bubble {
-  max-width: 80%;
-  padding: 10px;
-  border-radius: 12px;
-  background-color: #d0f0ff;
-  color: #222;
-  font-size: 14px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
+/* Chatbox background color and scroll */
+.chat-box {
+  background: linear-gradient(120deg, rgba(161,140,209,0.08) 0%, rgba(251,194,235,0.08) 100%);
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 18px 12px 8px 12px;
+  border-radius: 18px 18px 0 0;
+  min-height: 0;
 }
 
-.msg.user .bubble {
-  background-color: #007bff;
-  color: white;
-}
-
-.sources {
-  margin-top: 6px;
-  font-size: 12px;
-}
-
-.sources a {
-  color: #333;
-  text-decoration: underline;
-}
-
+/* Input row styling */
 .input-row {
   display: flex;
-  border-top: 1px solid #ddd;
+  align-items: center;
+  padding: 10px 12px 12px 12px;
+  background: rgba(255,255,255,0.45);
+  border-radius: 0 0 18px 18px;
+  box-shadow: 0 2px 8px 0 rgba(161,140,209,0.07);
 }
 
-input[type="text"] {
+/* Optional: Style the input and send button for a modern look */
+.input-row input[type="text"] {
   flex: 1;
-  padding: 10px;
-  font-size: 14px;
   border: none;
-  border-radius: 0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 1em;
+  background: rgba(255,255,255,0.7);
+  margin-right: 8px;
   outline: none;
-}
-
-button {
-  padding: 0 15px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
+  box-shadow: 0 1px 4px 0 rgba(161,140,209,0.06);
   transition: background 0.2s;
 }
 
-button:hover {
-  background-color: #0056b3;
+.input-row input[type="text"]:focus {
+  background: rgba(255,255,255,0.95);
 }
 
-.robot-image {
-  width: 80px;
-  height: 80px;
-  display: block;
-  margin: 0 auto 10px auto;
-  animation: float 3s ease-in-out infinite;
+.input-row button {
+  border: none;
+  background: #a18cd1;
+  color: #fff;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 1.15em;
+  cursor: pointer;
+  transition: background 0.18s, box-shadow 0.18s;
+  margin-left: 2px;
+  box-shadow: 0 2px 8px 0 rgba(161,140,209,0.09);
 }
 
-.motto {
-  text-align: center;
-  color: #555;
-  font-size: 13px;
-  margin-bottom: 10px;
-  font-style: italic;
+.input-row button:active {
+  background: #7e6aa6;
 }
 
-/* Optional floating animation for the image */
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
-  100% { transform: translateY(0px); }
+/* Scrollbar styling for chat */
+.chat-box::-webkit-scrollbar {
+  width: 7px;
 }
-
-.voice-dot {
-  width: 8px;
-  height: 8px;
-  background: #1976d2;
-  border-radius: 50%;
-  margin-right: 4px;
-  animation: pulse-dot 1s infinite;
+.chat-box::-webkit-scrollbar-thumb {
+  background: #e0c3fc;
+  border-radius: 6px;
 }
-
-.voice-wave {
-  width: 18px;
-  height: 8px;
-  background: linear-gradient(90deg, #1976d2 40%, transparent 100%);
-  border-radius: 4px;
-  animation: wave-move 1s infinite linear;
-  opacity: 0.7;
+.chat-box::-webkit-scrollbar-track {
+  background: transparent;
 }
-
-@keyframes pulse-dot {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.5); opacity: 0.5; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes wave-move {
-  0% { transform: scaleY(1); }
-  50% { transform: scaleY(1.7); }
-  100% { transform: scaleY(1); }
+.chat-box::-webkit-scrollbar-thumb:hover {
+  background: #d1a0f8;
 }
